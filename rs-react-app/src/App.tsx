@@ -1,7 +1,5 @@
-import './App.css';
-
 function App() {
-  return <div>dddd</div>;
+  return <div className=" text-amber-300">Hello</div>;
 }
 
 export default App;
