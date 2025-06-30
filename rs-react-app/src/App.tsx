@@ -1,64 +1,27 @@
 import { Component } from 'react';
+import { MainContent } from './components/MainContent/MainContent';
+import { Header } from './components/Header/Header';
 
 class App extends Component {
-  render() {
-    return (
-      <div>
-        <Header />
-        <MainContent />
-      </div>
-    );
-  }
-}
-class Header extends Component {
-  render() {
-    return (
-      <header>
-        <InputSearch />
-        <Button />
-      </header>
-    );
-  }
-}
-class InputSearch extends Component {
-  render() {
-    return (
-      <div>
-        <h2>Search Component</h2>
-      </div>
-    );
-  }
-}
-class Button extends Component {
-  render() {
-    return <button>Click Me</button>;
-  }
-}
+  state = {
+    searchTerm: localStorage.getItem('searchTerm') || '',
+  };
 
-class MainContent extends Component {
-  render() {
-    return (
-      <main>
-        <ul>
-          {[1, 2, 3, 4, 5].map((item) => (
-            <CardItem key={item} item={item} />
-          ))}
-        </ul>
-      </main>
-    );
-  }
-}
-interface CardsProps {
-  item: number;
-}
+  setSearchTerm = (term: string) => {
+    localStorage.setItem('searchTerm', term);
+    this.setState({ searchTerm: term });
+  };
 
-class CardItem extends Component<CardsProps> {
   render() {
     return (
-      <li>
-        <h3>Card {this.props.item}</h3>
-        <p>Details about card {this.props.item}</p>
-      </li>
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 p-4 md:p-8 transition-colors duration-300">
+        <Header
+          searchTerm={this.state.searchTerm}
+          setSearchTerm={this.setSearchTerm}
+        />
+
+        <MainContent searchTerm={this.state.searchTerm} />
+      </div>
     );
   }
 }
