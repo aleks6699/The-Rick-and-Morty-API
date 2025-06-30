@@ -20,7 +20,7 @@ export class Header extends Component<{
 
   render() {
     return (
-      <header className="flex flex-col md:flex-row gap-4 mb-8">
+      <header className="container flex flex-col mx-auto md:flex-row gap-4 mb-8 ">
         <InputSearch onChange={this.onChange} value={this.state.inputValue} />
         <Button onClick={this.onClick} />
       </header>
