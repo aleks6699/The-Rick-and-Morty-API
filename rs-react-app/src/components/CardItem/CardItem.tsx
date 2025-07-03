@@ -18,11 +18,12 @@ export class CardItem extends Component<Card> {
     const { image, name, species, status, gender, location } = this.props;
 
     return (
-      <div className="bg-gradient-to-br from-gray-800 to-gray-700 rounded-xl overflow-hidden shadow-lg border border-gray-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl animate-fadeIn">
+      <li className="bg-gradient-to-br from-gray-800 to-gray-700 rounded-xl overflow-hidden shadow-lg border border-gray-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl animate-fadeIn">
         <div className="relative h-70 overflow-hidden group">
           <img
             src={image}
             alt={name}
+            loading="lazy"
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           />
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -44,7 +45,7 @@ export class CardItem extends Component<Card> {
             <span className="text-gray-400">Location:</span> {location.name}
           </p>
         </div>
-      </div>
+      </li>
     );
   }
 }

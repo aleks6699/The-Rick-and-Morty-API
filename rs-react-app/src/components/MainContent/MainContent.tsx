@@ -3,6 +3,7 @@ import { CardItem, type Card } from '../CardItem/CardItem';
 import { API_BASE_URL } from '../../constants/endpoints';
 
 type Cards = Card[];
+
 type MainContentState = {
   results: Cards;
   loading: boolean;
@@ -33,7 +34,7 @@ export class MainContent extends Component<{ searchTerm: string }> {
       const response = await fetch(`${url}?name=${term}&page=1`);
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error('Character not found');
       }
 
       const data = await response.json();
@@ -77,11 +78,11 @@ export class MainContent extends Component<{ searchTerm: string }> {
           </p>
         )}
 
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-6">
+        <ul className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-6">
           {results.map((item) => (
             <CardItem key={item.id} {...item} />
           ))}
-        </div>
+        </ul>
       </main>
     );
   }
