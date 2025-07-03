@@ -18,7 +18,7 @@ export class ButtonError extends Component<ButtonErrorState> {
     return (
       <button
         onClick={this.handleClick}
-        className="fixed bottom-4 right-4 bg-red-500 text-white p-3 rounded-full shadow-lg z-50"
+        className="fixed cursor-pointer  bottom-4 right-4 bg-red-500 text-white p-3 rounded-full shadow-lg z-50"
         title="Simulate error"
       >
         💥

@@ -3,10 +3,15 @@ import { CardItem, type Card } from '../CardItem/CardItem';
 import { API_BASE_URL } from '../../constants/endpoints';
 
 type Cards = Card[];
+type MainContentState = {
+  results: Cards;
+  loading: boolean;
+  error: string;
+};
 
 export class MainContent extends Component<{ searchTerm: string }> {
-  state = {
-    results: [] as Cards,
+  state: MainContentState = {
+    results: [],
     loading: false,
     error: '',
   };
@@ -28,7 +33,7 @@ export class MainContent extends Component<{ searchTerm: string }> {
       const response = await fetch(`${url}?name=${term}&page=1`);
 
       if (!response.ok) {
-        throw new Error('Character not found');
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
 
       const data = await response.json();
@@ -38,9 +43,10 @@ export class MainContent extends Component<{ searchTerm: string }> {
       }
 
       this.setState({ results: data.results });
-    } catch (error) {
-      console.error('Error fetching data:', error);
-      this.setState({ error: 'Character not found' });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        this.setState({ error: error.message || 'Character not found' });
+      }
     } finally {
       this.setState({ loading: false });
     }

@@ -24,7 +24,7 @@ export class ErrorBoundary extends Component<
             <div className="absolute bottom-1/3 right-1/4 w-72 h-72 bg-purple-500/5 rounded-full mix-blend-screen filter blur-3xl"></div>
           </div>
 
-          <div className="relative bg-gradient-to-br from-red-900/40 via-red-900/30 to-red-800/20 border border-red-700/50 backdrop-blur-lg rounded-2xl p-8 max-w-md w-full shadow-2xl shadow-red-900/30 overflow-hidden">
+          <div className="relative bg-gradient-to-br from-red-700/40 via-red-900/30 to-red-800/20 border border-red-200/50 backdrop-blur-lg rounded-2xl p-8 max-w-md w-full shadow-2xl shadow-red-900/30 overflow-hidden">
             <div className="absolute -inset-1 bg-red-500/10 rounded-2xl filter blur-md"></div>
 
             <div className="absolute top-0 right-0 w-16 h-16 bg-red-500/5 rounded-full transform translate-x-1/2 -translate-y-1/2"></div>
@@ -42,7 +42,7 @@ export class ErrorBoundary extends Component<
               </p>
               <button
                 onClick={() => this.setState({ hasError: false })}
-                className="relative bg-gradient-to-r from-red-600 to-amber-700 hover:from-red-500 hover:to-amber-600 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 hover:shadow-lg hover:shadow-red-500/30 transform hover:-translate-y-0.5 active:translate-y-0"
+                className="relative cursor-pointer bg-gradient-to-r from-red-600 to-amber-700 hover:from-red-500 hover:to-amber-600 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 hover:shadow-lg hover:shadow-red-500/30 transform hover:-translate-y-0.5 active:translate-y-0"
               >
                 <span className="relative z-10">Restart Reality</span>
                 <span className="absolute inset-0 bg-white/10 rounded-xl opacity-0 hover:opacity-100 transition-opacity duration-300"></span>
