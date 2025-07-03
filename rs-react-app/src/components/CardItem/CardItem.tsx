@@ -19,8 +19,8 @@ export class CardItem extends Component<Card> {
     const { image, name, species, status, gender, location } = this.props;
 
     return (
-      <li className="bg-gradient-to-br from-gray-800 to-gray-700 rounded-xl overflow-hidden shadow-lg border border-gray-700 transition-all duration-300  hover:shadow-2xl animate-fadeIn">
-        <div className="relative h-70 overflow-hidden group">
+      <li className="bg-gradient-to-br from-gray-800 to-gray-700 rounded-xl overflow-hidden shadow-lg border border-gray-700 transition-all duration-300 hover:shadow-2xl animate-fadeIn group">
+        <div className="relative h-70 overflow-hidden">
           <img
             src={image}
             alt={name}
@@ -32,7 +32,6 @@ export class CardItem extends Component<Card> {
             <h2 className="text-xl font-bold text-white">{name}</h2>
           </div>
         </div>
-
         <div className="p-4 space-y-2">
           <p className="text-blue-300">
             <span className="text-gray-400">Species:</span> {species}
