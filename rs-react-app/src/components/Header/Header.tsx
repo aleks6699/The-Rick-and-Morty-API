@@ -1,29 +1,25 @@
-import { Component } from 'react';
 import { InputSearch } from '../InputSearch/InputSearch';
 import { Button } from '../Button/Button';
 
-export class Header extends Component<{
+export function Header({
+  searchTerm,
+  setSearchTerm,
+}: {
   searchTerm: string;
   setSearchTerm: (term: string) => void;
-}> {
-  state = {
-    inputValue: this.props.searchTerm,
+}) {
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
   };
 
-  onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ inputValue: event.target.value });
+  const onClick = () => {
+    setSearchTerm(searchTerm);
   };
 
-  onClick = () => {
-    this.props.setSearchTerm(this.state.inputValue);
-  };
-
-  render() {
-    return (
-      <header className="container flex flex-col mx-auto md:flex-row gap-4 mb-8 ">
-        <InputSearch onChange={this.onChange} value={this.state.inputValue} />
-        <Button onClick={this.onClick} />
-      </header>
-    );
-  }
+  return (
+    <header className="container flex flex-col mx-auto md:flex-row gap-4 mb-8">
+      <InputSearch onChange={onChange} value={searchTerm} />
+      <Button onClick={onClick} />
+    </header>
+  );
 }
