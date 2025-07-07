@@ -1,8 +1,9 @@
 import { createBrowserRouter } from 'react-router';
 import App from '../App';
 import { NotFound } from '../components/NotFound/NotFound';
-import { About } from '../pages/About';
+
 import { ButtonError } from '../components/ButtonError/ButtonError';
+import { AboutPage } from '../pages/About';
 
 export const router = createBrowserRouter([
   {
@@ -13,7 +14,7 @@ export const router = createBrowserRouter([
 
   {
     path: '/about',
-    element: <About />,
+    element: <AboutPage />,
   },
 
   {
