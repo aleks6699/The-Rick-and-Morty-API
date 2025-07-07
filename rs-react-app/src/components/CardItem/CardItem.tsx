@@ -1,17 +1,5 @@
+import type { Card } from '../../types/types';
 import { handleErorrImage } from '../../utils/handleErrorImage';
-
-export interface Card {
-  id: number;
-  name: string;
-  species: string;
-  status: string;
-  gender: string;
-  image: string;
-  location: {
-    name: string;
-    url: string;
-  };
-}
 
 export function CardItem(props: Card) {
   const { image, name, species, status, location, gender } = props;

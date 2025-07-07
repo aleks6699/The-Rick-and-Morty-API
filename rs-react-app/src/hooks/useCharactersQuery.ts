@@ -1,35 +1,36 @@
 import { useEffect, useState } from 'react';
-import type { MainContentState } from '../components/MainContent/MainContent';
 import { rickAndMortyApi } from '../api/RickAndMortyApi';
+import type { MainContentState } from '../types/types';
 
-export function useCharactersQuery(value: string) {
+export function useCharactersQuery(value: string, page: number = 1) {
   const [controlResponse, setControlResponse] = useState<MainContentState>({
     results: [],
     loading: false,
     error: '',
+    info: { count: 0, pages: 0, next: '', prev: '' },
   });
 
   useEffect(() => {
     const controller = new AbortController();
     const signal = controller.signal;
-
     let isCurrent = true;
 
     const fetchData = async () => {
-      setControlResponse({
-        results: [],
-        loading: true,
-        error: '',
-      });
-
       try {
-        const data = await rickAndMortyApi.fetchCharacters(value, signal);
+        setControlResponse((prev) => ({
+          ...prev,
+          loading: true,
+          error: '',
+        }));
+
+        const data = await rickAndMortyApi.fetchCharacters(value, signal, page);
 
         if (isCurrent) {
           setControlResponse({
-            results: data,
+            results: data.results,
             loading: false,
             error: '',
+            info: data.info,
           });
         }
       } catch (error) {
@@ -38,7 +39,8 @@ export function useCharactersQuery(value: string) {
             setControlResponse({
               results: [],
               loading: false,
-              error: error.message || 'Character not found',
+              error: error.message,
+              info: { count: 0, pages: 0, next: null, prev: null },
             });
           }
         }
@@ -51,7 +53,7 @@ export function useCharactersQuery(value: string) {
       isCurrent = false;
       controller.abort();
     };
-  }, [value]);
+  }, [value, page]);
 
   return controlResponse;
 }

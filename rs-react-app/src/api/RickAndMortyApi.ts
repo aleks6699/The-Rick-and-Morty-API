@@ -1,6 +1,5 @@
-import type { Card } from '../components/CardItem/CardItem';
-import type { Cards } from '../components/MainContent/MainContent';
 import { API_BASE_URL } from '../constants/endpoints';
+import type { Card, ResponseCharacter } from '../types/types';
 
 export class RickAndMortyApi {
   private baseUrl: string;
@@ -25,18 +24,19 @@ export class RickAndMortyApi {
       return data;
     }
 
-    return data.results;
+    return data;
   }
   async fetchCharacters(
     term = '',
     signal: AbortSignal,
     page = 1,
     url = this.baseUrl
-  ): Promise<Cards> {
+  ): Promise<ResponseCharacter> {
     const response = await fetch(`${url}?name=${term}&page=${page}`, {
       signal,
     });
-    const data = await this.handleResponse<Cards>(response);
+    const data = await this.handleResponse<ResponseCharacter>(response);
+    console.log(data);
 
     return data;
   }
