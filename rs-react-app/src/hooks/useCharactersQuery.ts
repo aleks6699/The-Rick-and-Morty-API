@@ -12,44 +12,46 @@ export function useCharactersQuery(value: string) {
   useEffect(() => {
     const controller = new AbortController();
     const signal = controller.signal;
+
+    let isCurrent = true;
+
     const fetchData = async () => {
-      setControlResponse((prevState) => ({
-        ...prevState,
+      setControlResponse({
+        results: [],
         loading: true,
         error: '',
-      }));
+      });
 
       try {
         const data = await rickAndMortyApi.fetchCharacters(value, signal);
-        setControlResponse((prevState) => ({
-          ...prevState,
-          results: data,
-        }));
-      } catch (error: unknown) {
-        if (error instanceof Error) {
-          setControlResponse((prevState) => ({
-            ...prevState,
-            error: error.message || 'Character not found',
-            results: [],
-          }));
+
+        if (isCurrent) {
+          setControlResponse({
+            results: data,
+            loading: false,
+            error: '',
+          });
         }
-      } finally {
-        setControlResponse((prevState) => ({
-          ...prevState,
-          loading: false,
-        }));
+      } catch (error) {
+        if (isCurrent) {
+          if (error instanceof Error && error.name !== 'AbortError') {
+            setControlResponse({
+              results: [],
+              loading: false,
+              error: error.message || 'Character not found',
+            });
+          }
+        }
       }
     };
 
     fetchData();
+
     return () => {
+      isCurrent = false;
       controller.abort();
     };
   }, [value]);
 
-  return {
-    results: controlResponse.results,
-    loading: controlResponse.loading,
-    error: controlResponse.error,
-  };
+  return controlResponse;
 }

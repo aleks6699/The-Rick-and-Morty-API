@@ -1,5 +1,6 @@
 import { CardItem, type Card } from '../CardItem/CardItem';
 import { useCharactersQuery } from '../../hooks/useCharactersQuery';
+import { Outlet } from 'react-router';
 
 export type Cards = Card[];
 
@@ -38,6 +39,7 @@ export function MainContent({ value }: { value: string }) {
           <CardItem key={item.id} {...item} />
         ))}
       </ul>
+      <Outlet />
     </main>
   );
 }
