@@ -1,59 +1,57 @@
 import { useEffect, useState } from 'react';
 import { rickAndMortyApi } from '../api/RickAndMortyApi';
 import type { MainContentState } from '../types/types';
+import { useSearchParams } from 'react-router';
 
-export function useCharactersQuery(value: string, page: number = 1) {
-  const [controlResponse, setControlResponse] = useState<MainContentState>({
-    results: [],
-    loading: false,
-    error: '',
-    info: { count: 0, pages: 0, next: '', prev: '' },
-  });
+const initialState: MainContentState = {
+  results: [],
+  loading: false,
+  error: '',
+  info: { count: 0, pages: 0, next: null, prev: null },
+};
+export function useCharactersQuery(value: string, page = 1) {
+  const [state, setState] = useState(initialState);
+  const [searchParams] = useSearchParams();
+  const currentPage = Number(searchParams.get('page')) || page;
+  const searchValue = searchParams.get('search') || value;
 
   useEffect(() => {
     const controller = new AbortController();
-    const signal = controller.signal;
-    let isCurrent = true;
 
     const fetchData = async () => {
       try {
-        setControlResponse((prev) => ({
-          ...prev,
-          loading: true,
-          error: '',
-        }));
+        setState((prev) => ({ ...prev, loading: true, error: '' }));
 
-        const data = await rickAndMortyApi.fetchCharacters(value, signal, page);
+        const data = await rickAndMortyApi.fetchCharacters(
+          searchValue,
+          controller.signal,
+          currentPage
+        );
 
-        if (isCurrent) {
-          setControlResponse({
+        if (!controller.signal.aborted) {
+          setState({
             results: data.results,
+            info: data.info,
             loading: false,
             error: '',
-            info: data.info,
           });
         }
       } catch (error) {
-        if (isCurrent) {
-          if (error instanceof Error && error.name !== 'AbortError') {
-            setControlResponse({
-              results: [],
-              loading: false,
-              error: error.message,
-              info: { count: 0, pages: 0, next: null, prev: null },
-            });
-          }
+        if (!controller.signal.aborted && error instanceof Error) {
+          setState({
+            results: [],
+            info: { count: 0, pages: 0, next: null, prev: null },
+            loading: false,
+            error: error.message,
+          });
         }
       }
     };
 
     fetchData();
 
-    return () => {
-      isCurrent = false;
-      controller.abort();
-    };
-  }, [value, page]);
+    return () => controller.abort();
+  }, [searchValue, currentPage]);
 
-  return controlResponse;
+  return state;
 }

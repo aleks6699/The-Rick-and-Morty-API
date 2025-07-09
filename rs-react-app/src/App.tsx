@@ -2,12 +2,16 @@ import { MainContent } from './components/MainContent/MainContent';
 import { Header } from './components/Header/Header';
 import { ErrorBoundary } from './ErrorBoundary';
 import { useState } from 'react';
+import { useSearchParams } from 'react-router';
 
 function App() {
   const [searchTerm, setSearchTerm] = useState<string>(
     localStorage.getItem('searchTerm') || ''
   );
+  const [, setSearchParams] = useSearchParams();
+
   function handleClick(value: string) {
+    setSearchParams({ search: value, page: '1' });
     localStorage.setItem('searchTerm', value);
     setSearchTerm(value);
   }

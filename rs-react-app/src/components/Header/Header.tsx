@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useSearchParams } from 'react-router';
 
 export function Header({ onClick }: { onClick: (value: string) => void }) {
-  const [value, setValue] = useState<string>(
-    localStorage.getItem('searchTerm') || ''
-  );
+  const [searchParams] = useSearchParams();
+  const search = searchParams.get('search');
+  const [value, setValue] = useState<string>(search || '');
   return (
     <header className="container flex flex-col mx-auto md:flex-row gap-4 mb-8">
       <Link

@@ -14,11 +14,18 @@ export type Cards = Card[];
 export interface Card {
   id: number;
   name: string;
-  species: string;
   status: string;
+  species: string;
   gender: string;
   image: string;
-  location: {
+  created?: string;
+  location?: {
+    name: string;
+    url: string;
+  };
+  url?: string;
+  type?: string;
+  origin?: {
     name: string;
     url: string;
   };

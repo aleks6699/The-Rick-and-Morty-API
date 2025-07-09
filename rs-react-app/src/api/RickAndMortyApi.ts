@@ -17,9 +17,7 @@ export class RickAndMortyApi {
     if (data.error) {
       throw new Error(errorMessage);
     }
-    if (!data.results) {
-      throw new Error('No results found');
-    }
+
     if (!Array.isArray(data.results)) {
       return data;
     }
@@ -36,8 +34,6 @@ export class RickAndMortyApi {
       signal,
     });
     const data = await this.handleResponse<ResponseCharacter>(response);
-    console.log(data);
-
     return data;
   }
   async fetchCharacterById(
