@@ -10,7 +10,6 @@ export function CharacterDetails() {
     Number(id)
   );
 
-  console.log(searchParams);
   const handleClose = () => {
     const newSearchParams = new URLSearchParams(searchParams);
     newSearchParams.delete('id');
@@ -19,7 +18,10 @@ export function CharacterDetails() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-full">
+      <div
+        data-testid="loader"
+        className="flex justify-center items-center h-full"
+      >
         <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
       </div>
     );
@@ -41,25 +43,25 @@ export function CharacterDetails() {
   }
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl shadow-xl overflow-hidden h-full max-w-full md:max-w-4xl mx-auto relative">
+    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl shadow-2xl overflow-hidden h-full max-w-full md:max-w-4xl mx-auto relative animate-fadeInRight">
       <button
         onClick={handleClose}
+        data-testid="close-button"
         className="absolute top-3 right-3 z-20 w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center bg-white rounded-full shadow-md text-gray-500 hover:text-red-500 hover:bg-red-50 transition-all duration-300"
       >
-        <span className="text-lg font-bold">×</span>
+        <span className="text-lg font-bold translate-y-[-1.5px]">×</span>
       </button>
 
       {hasData && character ? (
         <div className="flex flex-col h-full">
-          <div className="relative w-full aspect-[4/3] sm:aspect-video overflow-hidden">
+          <div className="relative w-full h-[300px] overflow-hidden">
             <img
               src={character.image}
               alt={character.name}
               className="absolute inset-0 w-full h-full object-cover object-center"
               onError={handleErorrImage}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-indigo-900/80 to-transparent z-10"></div>
-
+            <div className="absolute inset-0 bg-gradient-to-t from-indigo-900/80 to-transparent z-10" />
             <div className="absolute bottom-3 left-3 z-20">
               <div
                 className={`flex items-center px-3 py-1.5 rounded-full text-white font-bold text-xs sm:text-sm ${
@@ -78,7 +80,7 @@ export function CharacterDetails() {
             </div>
           </div>
 
-          <div className="p-3 sm:p-4 flex-grow bg-white overflow-y-auto max-h-[calc(100vh-200px)]">
+          <div className="p-3 sm:p-4 flex-grow bg-white overflow-y-auto max-h-[calc(100vh-350px)]">
             <div className="grid grid-cols-1 gap-2 sm:gap-3">
               <DetailCard title="Species" value={character.species} />
               <DetailCard title="Gender" value={character.gender} />

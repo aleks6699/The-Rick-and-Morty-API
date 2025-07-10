@@ -11,6 +11,8 @@ export default defineConfig({
         'src/**/*.test.{js,jsx,ts,tsx}',
         'src/index.{js,jsx,ts,tsx}',
         'src/vitest-test.{js,ts}',
+        'src/types/*.{js,ts}',
+        'src/mock/*.{js,ts}',
         'src/**/*.d.ts',
       ],
       thresholds: {

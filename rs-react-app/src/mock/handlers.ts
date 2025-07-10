@@ -34,4 +34,27 @@ export const handlers = [
       { status: 200 }
     );
   }),
+  http.get(`${API_BASE_URL}/character/:id`, ({ params }) => {
+    const { id } = params;
+
+    if (id === '404') {
+      return HttpResponse.json(
+        { error: 'Character not found' },
+        { status: 404 }
+      );
+    }
+
+    return HttpResponse.json(
+      {
+        id: Number(id),
+        name: 'Rick Sanchez',
+        species: 'Human',
+        status: 'Alive',
+        gender: 'Male',
+        image: 'https://example.com/image.jpg',
+        location: { name: 'Earth', url: 'https://example.com/location' },
+      },
+      { status: 200 }
+    );
+  }),
 ];

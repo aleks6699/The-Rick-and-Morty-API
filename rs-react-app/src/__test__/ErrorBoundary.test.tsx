@@ -1,19 +1,23 @@
 import { ErrorBoundary } from '../ErrorBoundary';
+import { MemoryRouter } from 'react-router';
 
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import { Header } from '../components/Header/Header';
 
 describe('ErrorBoundary', () => {
-  it('renders children without error', () => {
+  it('renders Header and reads search param', () => {
     render(
-      <ErrorBoundary>
-        <Header searchTerm="Test" setSearchTerm={() => {}} />
-      </ErrorBoundary>
+      <MemoryRouter initialEntries={['/?search=Test']}>
+        <ErrorBoundary>
+          <Header onClick={() => {}} />
+        </ErrorBoundary>
+      </MemoryRouter>
     );
+
     const inputElement = screen.getByPlaceholderText('Search character...');
-    expect(screen.getByDisplayValue('Test')).toBeInTheDocument();
     expect(inputElement).toBeInTheDocument();
+    expect(inputElement).toHaveValue('Test');
   });
   it('catches errors in children and displays fallback UI', () => {
     const consoleErrorSpy = vi

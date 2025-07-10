@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import App from '../App';
+import { MemoryRouter } from 'react-router';
 
 describe('App Component (with mocked localStorage)', () => {
   beforeEach(() => {
@@ -17,7 +18,11 @@ describe('App Component (with mocked localStorage)', () => {
   });
 
   it('renders Header and MainContent correctly', () => {
-    render(<App />);
+    render(
+      <MemoryRouter>
+        <App />{' '}
+      </MemoryRouter>
+    );
     expect(
       screen.getByPlaceholderText('Search character...')
     ).toBeInTheDocument();
@@ -26,12 +31,20 @@ describe('App Component (with mocked localStorage)', () => {
 
   it('initializes searchTerm from localStorage', () => {
     (localStorage.getItem as jest.Mock).mockReturnValue('Rick');
-    render(<App />);
+    render(
+      <MemoryRouter initialEntries={['/?search=Rick']}>
+        <App />{' '}
+      </MemoryRouter>
+    );
     expect(screen.getByDisplayValue('Rick')).toBeInTheDocument();
   });
 
   it('updates searchTerm and saves to localStorage on button click', () => {
-    render(<App />);
+    render(
+      <MemoryRouter>
+        <App />{' '}
+      </MemoryRouter>
+    );
     const input = screen.getByPlaceholderText('Search character...');
     const button = screen.getByRole('button', { name: /search/i });
 
@@ -43,7 +56,11 @@ describe('App Component (with mocked localStorage)', () => {
   });
 
   it('updates MainContent when searchTerm changes', () => {
-    render(<App />);
+    render(
+      <MemoryRouter>
+        <App />{' '}
+      </MemoryRouter>
+    );
     const input = screen.getByPlaceholderText('Search character...');
     const button = screen.getByRole('button', { name: /search/i });
 

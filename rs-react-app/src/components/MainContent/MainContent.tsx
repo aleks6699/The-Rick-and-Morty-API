@@ -50,7 +50,7 @@ export function MainContent({ value }: { value: string }) {
         <div className={`${isCharacterOpen ? 'md:w-2/3' : 'w-full'}`}>
           <ul
             onClick={handleCloseOutside}
-            className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-7"
+            className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-7"
           >
             {results.map((item) => (
               <CardItem key={item.id} {...item} />
