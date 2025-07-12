@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { Link, useSearchParams } from 'react-router';
 
-export function Header({ onClick }: { onClick: (value: string) => void }) {
+export function Header({
+  onClick,
+}: Readonly<{ onClick: (value: string) => void }>) {
   const [searchParams] = useSearchParams();
   const search = searchParams.get('search');
   const [value, setValue] = useState<string>(search || '');
@@ -19,8 +21,7 @@ export function Header({ onClick }: { onClick: (value: string) => void }) {
     transform hover:scale-105 active:scale-95
     border-2 border-transparent hover:border-indigo-400
     flex items-center justify-center
-    min-w-[120px]
-  "
+    min-w-[120px]"
       >
         About
       </Link>

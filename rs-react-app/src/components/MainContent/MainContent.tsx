@@ -3,7 +3,7 @@ import { Outlet, useSearchParams, useLocation } from 'react-router';
 import { CardItem } from '../CardItem/CardItem';
 import { Pagination } from '../Pagination/Pagination';
 
-export function MainContent({ value }: { value: string }) {
+export function MainContent({ value }: Readonly<{ value: string }>) {
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
   const currentPage = Number(searchParams.get('page')) || 1;

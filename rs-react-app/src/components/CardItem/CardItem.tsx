@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router';
 import type { Card } from '../../types/types';
 import { handleErorrImage } from '../../utils/handleErrorImage';
 
-export function CardItem(props: Card) {
+export function CardItem(props: Readonly<Card>) {
   const locationUrl = useLocation();
   const searchParams = new URLSearchParams(locationUrl.search);
   const { image, name, species, status, location, gender, id } = props;

@@ -9,7 +9,18 @@ export function CharacterDetails() {
   const { character, loading, error, hasData } = useCharacterDetailsQuery(
     Number(id)
   );
-
+  function getStatusCharacter(status: string) {
+    switch (status) {
+      case 'Alive':
+        return 'bg-green-500';
+      case 'Dead':
+        return 'bg-red-500';
+      case 'unknown':
+        return 'bg-gray-500';
+      default:
+        return 'bg-gray-500';
+    }
+  }
   const handleClose = () => {
     const newSearchParams = new URLSearchParams(searchParams);
     newSearchParams.delete('id');
@@ -64,13 +75,9 @@ export function CharacterDetails() {
             <div className="absolute inset-0 bg-gradient-to-t from-indigo-900/80 to-transparent z-10" />
             <div className="absolute bottom-3 left-3 z-20">
               <div
-                className={`flex items-center px-3 py-1.5 rounded-full text-white font-bold text-xs sm:text-sm ${
-                  character.status === 'Alive'
-                    ? 'bg-green-500'
-                    : character.status === 'Dead'
-                      ? 'bg-red-500'
-                      : 'bg-purple-500'
-                } shadow-md`}
+                className={`flex items-center px-3 py-1.5 rounded-full text-white font-bold text-xs sm:text-sm ${getStatusCharacter(
+                  character.status
+                )} shadow-md`}
               >
                 {character.status}
               </div>
