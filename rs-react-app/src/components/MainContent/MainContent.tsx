@@ -23,7 +23,7 @@ export class MainContent extends Component<{ searchTerm: string }> {
 
   componentDidUpdate(prevProps: { searchTerm: string }) {
     if (prevProps.searchTerm !== this.props.searchTerm) {
-      this.fetchData(this.props.searchTerm, API_BASE_URL);
+      this.fetchData(this.props.searchTerm.trim(), API_BASE_URL);
     }
   }
 
