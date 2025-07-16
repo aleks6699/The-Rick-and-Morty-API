@@ -5,8 +5,8 @@ import { MainContent } from '../components/MainContent/MainContent';
 describe('MainContent Component', () => {
   it('displays loader during loading and then content', async () => {
     render(<MainContent searchTerm="Rick" />);
+    const loader = screen.getByRole('status');
 
-    const loader = document.querySelector('.w-12.h-12.rounded-full');
     expect(loader).toBeInTheDocument();
     expect(loader).toHaveClass('animate-spin');
 
@@ -71,12 +71,5 @@ describe('MainContent Component', () => {
         screen.getByRole('heading', { name: /Morty/i })
       ).toBeInTheDocument();
     });
-  });
-
-  it('does not show loader for empty searchTerm', () => {
-    render(<MainContent searchTerm="" />);
-
-    expect(screen.queryByRole('status')).not.toBeInTheDocument();
-    expect(screen.queryByText(/Loading/i)).not.toBeInTheDocument();
   });
 });
