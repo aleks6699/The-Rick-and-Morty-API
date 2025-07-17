@@ -66,7 +66,7 @@ export function MainContent({ value }: Readonly<{ value: string }>) {
       </div>
 
       {info.pages > 1 && (
-        <div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t border-gray-200 py-3 z-10">
+        <div className="fixed bottom-0 left-0 right-0 bg-gray-700 shadow-lg border-t border-gray-200 py-3 z-10 light:bg-white">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <Pagination
               currentPage={currentPage}

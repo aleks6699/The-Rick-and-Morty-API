@@ -15,7 +15,11 @@ export function CardItem(props: Readonly<Card>) {
 
   return (
     <Link to={`/?${searchParams}`} className="pointer" onClick={onClick}>
-      <li className="bg-gradient-to-br from-gray-800 to-gray-700 rounded-xl overflow-hidden shadow-lg border border-gray-700 transition-all duration-300 hover:shadow-2xl animate-fadeIn group h-[400px] flex flex-col">
+      <li
+        className="bg-gradient-to-br from-gray-800 to-gray-700 light:from-white light:to-gray-100 
+  rounded-xl overflow-hidden shadow-lg border border-gray-700 light:border-gray-200 
+  transition-all duration-300 hover:shadow-2xl animate-fadeIn group h-[400px] flex flex-col"
+      >
         <div className="relative h-[250px] overflow-hidden shrink-0">
           <img
             src={image}
@@ -24,26 +28,30 @@ export function CardItem(props: Readonly<Card>) {
             onError={handleErorrImage}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           />
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-            <h2 className="text-xl font-bold text-white truncate">{name}</h2>
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent light:from-white/70 light:to-transparent p-4">
+            <h2 className="text-xl font-bold text-white light:text-gray-900 truncate">
+              {name}
+            </h2>
           </div>
         </div>
         <div className="p-4 space-y-2 flex-1 overflow-hidden">
-          <p className="text-blue-300 truncate">
-            <span className="text-gray-400">Species:</span> {species}
+          <p className="text-blue-300 light:text-blue-700 truncate">
+            <span className="text-gray-400 light:text-gray-600">Species:</span>{' '}
+            {species}
           </p>
           <p
-            className={
-              status === 'Alive' ? 'text-green-400' : 'text-red-400 truncate'
-            }
+            className={`${status === 'Alive' ? 'text-green-400 light:text-green-600' : 'text-red-400 light:text-red-600'} truncate`}
           >
-            <span className="text-gray-400">Status:</span> {status}
+            <span className="text-gray-400 light:text-gray-600">Status:</span>{' '}
+            {status}
           </p>
-          <p className="text-purple-300 truncate">
-            <span className="text-gray-400">Gender:</span> {gender}
+          <p className="text-purple-300 light:text-purple-700 truncate">
+            <span className="text-gray-400 light:text-gray-600">Gender:</span>{' '}
+            {gender}
           </p>
-          <p className="text-yellow-300 truncate">
-            <span className="text-gray-400">Location:</span> {location?.name}
+          <p className="text-yellow-300 light:text-yellow-600 truncate">
+            <span className="text-gray-400 light:text-gray-600">Location:</span>{' '}
+            {location?.name}
           </p>
         </div>
       </li>

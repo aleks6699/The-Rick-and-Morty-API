@@ -19,8 +19,8 @@ export const Pagination = ({
   );
 
   return (
-    <div className="flex justify-between items-center">
-      <div className="text-sm text-gray-600">
+    <div className="flex justify-between items-center p-4 bg-gray-800 light:bg-gray-300 rounded-lg">
+      <div className="text-sm text-gray-400 light:text-gray-600">
         Page {currentPage} of {totalPages}
       </div>
 
@@ -29,13 +29,12 @@ export const Pagination = ({
           onClick={() => onPageChange(1)}
           disabled={currentPage === 1}
           className={`
-            px-3 py-1 rounded-md
+            px-3 py-1 rounded-md transition-colors
             ${
               currentPage === 1
-                ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                : 'bg-gray-100 hover:bg-gray-200 cursor-pointer'
+                ? 'bg-gray-800 light:bg-gray-200 text-gray-500 light:text-gray-400 cursor-not-allowed'
+                : 'bg-gray-700 light:bg-gray-100 text-gray-300 light:text-gray-700 hover:bg-gray-600 light:hover:bg-gray-200 cursor-pointer'
             }
-            transition-colors
           `}
           aria-label="First page"
         >
@@ -46,13 +45,12 @@ export const Pagination = ({
           onClick={() => onPageChange(Math.max(1, currentPage - 1))}
           disabled={currentPage === 1}
           className={`
-            px-3 py-1 rounded-md
+            px-3 py-1 rounded-md transition-colors
             ${
               currentPage === 1
-                ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                : 'bg-gray-100 hover:bg-gray-200 cursor-pointer'
+                ? 'bg-gray-800 light:bg-gray-200 text-gray-500 light:text-gray-400 cursor-not-allowed'
+                : 'bg-gray-700 light:bg-gray-100 text-gray-300 light:text-gray-700 hover:bg-gray-600 light:hover:bg-gray-200 cursor-pointer'
             }
-            transition-colors
           `}
           aria-label="Previous page"
         >
@@ -64,13 +62,12 @@ export const Pagination = ({
             key={page}
             onClick={() => onPageChange(page)}
             className={`
-              px-3 py-1 rounded-md
+              px-3 py-1 rounded-md transition-colors
               ${
                 currentPage === page
-                  ? 'bg-blue-500 text-white cursor-default'
-                  : 'bg-gray-100 hover:bg-gray-200 cursor-pointer'
+                  ? 'bg-blue-500 light:bg-blue-600 text-white cursor-default'
+                  : 'bg-gray-700 light:bg-gray-100 text-gray-300 light:text-gray-700 hover:bg-gray-600 light:hover:bg-gray-200 cursor-pointer'
               }
-              transition-colors
             `}
             aria-current={currentPage === page ? 'page' : undefined}
           >
@@ -82,13 +79,12 @@ export const Pagination = ({
           onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
           disabled={currentPage === totalPages}
           className={`
-            px-3 py-1 rounded-md
+            px-3 py-1 rounded-md transition-colors
             ${
               currentPage === totalPages
-                ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                : 'bg-gray-100 hover:bg-gray-200 cursor-pointer'
+                ? 'bg-gray-800 light:bg-gray-200 text-gray-500 light:text-gray-400 cursor-not-allowed'
+                : 'bg-gray-700 light:bg-gray-100 text-gray-300 light:text-gray-700 hover:bg-gray-600 light:hover:bg-gray-200 cursor-pointer'
             }
-            transition-colors
           `}
           aria-label="Next page"
         >
@@ -99,13 +95,12 @@ export const Pagination = ({
           onClick={() => onPageChange(totalPages)}
           disabled={currentPage === totalPages}
           className={`
-            px-3 py-1 rounded-md
+            px-3 py-1 rounded-md transition-colors
             ${
               currentPage === totalPages
-                ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                : 'bg-gray-100 hover:bg-gray-200 cursor-pointer'
+                ? 'bg-gray-800 light:bg-gray-200 text-gray-500 light:text-gray-400 cursor-not-allowed'
+                : 'bg-gray-700 light:bg-gray-100 text-gray-300 light:text-gray-700 hover:bg-gray-600 light:hover:bg-gray-200 cursor-pointer'
             }
-            transition-colors
           `}
           aria-label="Last page"
         >
