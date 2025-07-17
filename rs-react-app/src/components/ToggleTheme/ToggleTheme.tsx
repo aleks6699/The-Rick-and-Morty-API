@@ -6,12 +6,11 @@ const PARTICLE_ANGLES = [30, 60, 90, 120, 150, 180] as const;
 export const ToggleTheme = () => {
   const theme = useTheme();
   const toggleTheme = useThemeActions();
-  const isDarkTheme = theme === 'light';
+  const isDarkTheme = theme === 'dark';
 
   return (
     <label
       className={style['cosmic-toggle']}
-      role="switch"
       aria-checked={isDarkTheme}
       aria-label={`Switch to ${isDarkTheme ? 'light' : 'dark'} theme`}
     >
