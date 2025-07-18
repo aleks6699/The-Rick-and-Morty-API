@@ -37,7 +37,7 @@ export function CardItem(props: Readonly<Card>) {
         </Link>
 
         <div className="absolute top-4 right-4 z-5 cursor-pointer">
-          <FavoriteToggle id={id} />
+          <FavoriteToggle {...props} />
         </div>
       </div>
 

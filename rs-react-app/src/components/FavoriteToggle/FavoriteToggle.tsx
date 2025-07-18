@@ -1,16 +1,18 @@
 import useFavoritesStore from '../../store/store';
+import type { Card } from '../../types/types';
 
-export function FavoriteToggle({ id }: Readonly<{ id: number }>) {
-  const isChecked = useFavoritesStore((state) => state.isFavorite(id));
+export function FavoriteToggle(props: Readonly<Card>) {
+  const isChecked = useFavoritesStore((state) => state.isFavorite(props.id));
   const addFavorite = useFavoritesStore((state) => state.addFavorite);
   const deleteFavorite = useFavoritesStore((state) => state.deleteFavorite);
+  console.log(useFavoritesStore((state) => state.favorites));
 
   const toggle = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.stopPropagation();
     if (isChecked) {
-      deleteFavorite(id);
+      deleteFavorite(props.id);
     } else {
-      addFavorite(id);
+      addFavorite({ ...props });
     }
   };
 
