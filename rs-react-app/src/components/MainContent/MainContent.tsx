@@ -55,12 +55,14 @@ export class MainContent extends Component<{ searchTerm: string }> {
 
   render() {
     const { results, loading, error } = this.state;
-
     return (
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {loading && (
           <div className="flex justify-center mb-8 animate-pulse">
-            <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+            <div
+              role="status"
+              className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"
+            ></div>
           </div>
         )}
 
