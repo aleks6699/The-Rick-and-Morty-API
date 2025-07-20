@@ -26,8 +26,8 @@ export function useCharacterDetailsQuery(id: number) {
       try {
         const data = await rickAndMortyApi.fetchCharacterById(
           id,
-          API_BASE_URL,
-          controller.signal
+          controller.signal,
+          API_BASE_URL
         );
 
         if (!controller.signal.aborted) {

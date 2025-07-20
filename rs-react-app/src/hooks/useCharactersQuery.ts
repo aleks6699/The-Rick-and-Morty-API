@@ -23,8 +23,8 @@ export function useCharactersQuery(value: string, page = 1) {
         setState((prev) => ({ ...prev, loading: true, error: '' }));
 
         const data = await rickAndMortyApi.fetchCharacters(
-          searchValue,
           controller.signal,
+          searchValue,
           currentPage
         );
 

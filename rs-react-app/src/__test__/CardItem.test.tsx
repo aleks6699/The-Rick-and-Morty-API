@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { CardItem } from '../components/CardItem/CardItem';
-import type { Card } from '../types/types';
+import  { Card } from '../s/s';
 import { MemoryRouter } from 'react-router';
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';

@@ -2,7 +2,7 @@ import { API_BASE_URL } from '../constants/endpoints';
 import type { Card, ResponseCharacter } from '../types/types';
 
 export class RickAndMortyApi {
-  private baseUrl: string;
+  private readonly baseUrl: string;
   constructor(baseUrl: string = API_BASE_URL) {
     this.baseUrl = baseUrl;
   }
@@ -25,8 +25,8 @@ export class RickAndMortyApi {
     return data;
   }
   async fetchCharacters(
-    term = '',
     signal: AbortSignal,
+    term = '',
     page = 1,
     url = this.baseUrl
   ): Promise<ResponseCharacter> {
@@ -38,8 +38,8 @@ export class RickAndMortyApi {
   }
   async fetchCharacterById(
     id: number,
-    url = this.baseUrl,
-    signal: AbortSignal
+    signal: AbortSignal,
+    url = this.baseUrl
   ): Promise<Card> {
     const response = await fetch(`${url}/${id}`, {
       signal,
