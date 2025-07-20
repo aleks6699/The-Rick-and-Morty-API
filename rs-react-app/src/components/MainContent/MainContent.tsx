@@ -2,6 +2,7 @@ import { useCharactersQuery } from '../../hooks/useCharactersQuery';
 import { Outlet, useSearchParams, useLocation } from 'react-router';
 import { CardItem } from '../CardItem/CardItem';
 import { Pagination } from '../Pagination/Pagination';
+import { DownloadPopup } from '../DownloadPopup/DownloadPopup';
 
 export function MainContent({ value }: Readonly<{ value: string }>) {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -64,6 +65,7 @@ export function MainContent({ value }: Readonly<{ value: string }>) {
           </div>
         )}
       </div>
+      <DownloadPopup />
 
       {info.pages > 1 && (
         <div className="fixed bottom-0 left-0 right-0 bg-gray-700 shadow-lg border-t border-gray-200 py-3 z-10 light:bg-white">

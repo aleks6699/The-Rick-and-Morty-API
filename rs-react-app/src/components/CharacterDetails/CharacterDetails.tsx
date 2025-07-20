@@ -56,13 +56,15 @@ export function CharacterDetails() {
   }
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 light:from-gray-800 light:to-gray-900 rounded-2xl shadow-2xl overflow-hidden h-full max-w-full md:max-w-4xl mx-auto relative animate-fadeInRight">
+    <div className="  bg-gradient-to-br from-blue-50 to-indigo-50 light:from-gray-800 light:to-gray-900 rounded-2xl shadow-2xl overflow-hidden h-full max-w-full md:max-w-4xl mx-auto relative animate-fadeInRight">
       <button
         onClick={handleClose}
         data-testid="close-button"
-        className="absolute top-3 right-3 z-20 w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center bg-white light:bg-gray-700 rounded-full shadow-md text-gray-500 light:text-gray-300 hover:text-red-500 hover:bg-red-50 light:hover:bg-red-900 transition-all duration-300"
+        className="  absolute top-3 right-3 z-20 w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center bg-white light:bg-gray-700 rounded-full shadow-md text-gray-500 light:text-gray-300 hover:text-red-500 hover:bg-red-50 light:hover:bg-red-900 transition-all duration-300"
       >
-        <span className="text-lg font-bold translate-y-[-1.5px]">×</span>
+        <span className=" cursor-pointer text-lg font-bold translate-y-[-1.5px]">
+          ×
+        </span>
       </button>
 
       {hasData && character ? (

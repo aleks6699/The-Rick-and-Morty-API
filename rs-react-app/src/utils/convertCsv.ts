@@ -3,6 +3,7 @@ import type { FavoriteItem } from '../store/store';
 export function convertToCSV(items: FavoriteItem[]) {
   const headers = ['ID', 'Name', 'Status', 'Species', 'Gender', 'Image'];
   const rows = items.map((item) => [
+    item.id,
     item.name,
     item.status,
     item.species,
