@@ -2,6 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import App from '../App';
 import { MemoryRouter } from 'react-router';
+import { assertIsHTMLElement } from '../utils/asserts/domAsserts';
 
 describe('App Component (with mocked localStorage)', () => {
   beforeEach(() => {
@@ -12,6 +13,12 @@ describe('App Component (with mocked localStorage)', () => {
       clear: vi.fn(),
     });
   });
+
+  vi.mock('../utils/asserts/domAsserts', () => ({
+    assertIsHTMLElement: vi.fn(),
+  }));
+
+  (assertIsHTMLElement as jest.Mock).mockImplementation(() => {});
 
   afterEach(() => {
     vi.unstubAllGlobals();
