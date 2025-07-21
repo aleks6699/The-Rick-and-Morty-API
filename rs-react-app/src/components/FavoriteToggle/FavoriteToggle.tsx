@@ -5,7 +5,6 @@ export function FavoriteToggle(props: Readonly<Card>) {
   const isChecked = useFavoritesStore((state) => state.isFavorite(props.id));
   const addFavorite = useFavoritesStore((state) => state.addFavorite);
   const deleteFavorite = useFavoritesStore((state) => state.deleteFavorite);
-  console.log(useFavoritesStore((state) => state.favorites));
 
   const toggle = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.stopPropagation();

@@ -1,14 +1,22 @@
 import { useSearchParams, useNavigate } from 'react-router';
-import { useCharacterDetailsQuery } from '../../hooks/useCharacterDetailsQuery';
 import { handleErorrImage } from '../../utils/handleErrorImage';
+import { useQuery } from '@tanstack/react-query';
+import { rickAndMortyApi } from '../../api/RickAndMortyApi';
 
 export function CharacterDetails() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const id = searchParams.get('id');
-  const { character, loading, error, hasData } = useCharacterDetailsQuery(
-    Number(id)
-  );
+  const {
+    data: character,
+    isLoading: loading,
+    error,
+  } = useQuery({
+    queryKey: ['character', id],
+    queryFn: ({ signal }) =>
+      rickAndMortyApi.fetchCharacterById(Number(id), signal),
+  });
+
   function getStatusCharacter(status: string) {
     switch (status) {
       case 'Alive':
@@ -50,7 +58,9 @@ export function CharacterDetails() {
         <h2 className="text-lg font-bold text-red-600 light:text-red-400 mb-2">
           Error
         </h2>
-        <p className="text-sm text-gray-700 light:text-gray-300">{error}</p>
+        <p className="text-sm text-gray-700 light:text-gray-300">
+          {error.message}
+        </p>
       </div>
     );
   }
@@ -67,7 +77,7 @@ export function CharacterDetails() {
         </span>
       </button>
 
-      {hasData && character ? (
+      {character ? (
         <div className="flex flex-col h-full">
           <div className="relative w-full h-[300px] overflow-hidden">
             <img
