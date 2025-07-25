@@ -2,7 +2,7 @@ import { useSearchParams, useNavigate } from 'react-router';
 import { useCharacterDetailsQuery } from '../../hooks/useCharacterDetailsQuery';
 import { handleErorrImage } from '../../utils/handleErrorImage';
 
-export function CharacterDetails() {
+export default function CharacterDetails() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const id = searchParams.get('id');

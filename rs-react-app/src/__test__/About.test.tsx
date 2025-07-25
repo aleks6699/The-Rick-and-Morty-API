@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { AboutPage } from '../pages/About';
+import AboutPage from '../pages/About';
 import { MemoryRouter } from 'react-router';
 
 describe('AboutPage', () => {

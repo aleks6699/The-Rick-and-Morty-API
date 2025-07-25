@@ -1,9 +1,12 @@
 import { createBrowserRouter } from 'react-router';
 import App from '../App';
-import { NotFound } from '../components/NotFound/NotFound';
+import { lazy } from 'react';
 
-import { AboutPage } from '../pages/About';
-import { CharacterDetails } from '../components/CharacterDetails/CharacterDetails';
+const CharacterDetails = lazy(
+  () => import('../components/CharacterDetails/CharacterDetails')
+);
+const AboutPage = lazy(() => import('../pages/About'));
+const NotFound = lazy(() => import('../pages/NotFound'));
 
 export const router = createBrowserRouter([
   {

@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
-import { CharacterDetails } from '../components/CharacterDetails/CharacterDetails';
+import CharacterDetails from '../components/CharacterDetails/CharacterDetails';
 import { useCharacterDetailsQuery } from '../hooks/useCharacterDetailsQuery';
 import { vi } from 'vitest';
 
