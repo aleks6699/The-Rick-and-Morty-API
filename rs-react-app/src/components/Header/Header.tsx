@@ -1,12 +1,10 @@
-import { useState } from 'react';
-import { Link, useSearchParams } from 'react-router';
+import { Link } from 'react-router';
+import { useSearchSync } from '../../hooks/useSearchSync';
 
 export function Header({
   onClick,
 }: Readonly<{ onClick: (value: string) => void }>) {
-  const [searchParams] = useSearchParams();
-  const search = searchParams.get('search');
-  const [value, setValue] = useState<string>(search || '');
+  const { value, setValue } = useSearchSync();
   return (
     <header className="container flex flex-col mx-auto md:flex-row gap-4 mb-8">
       <Link

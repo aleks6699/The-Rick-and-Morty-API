@@ -14,6 +14,7 @@ export function useCharactersQuery(value: string, page = 1) {
   const [searchParams] = useSearchParams();
   const currentPage = Number(searchParams.get('page')) || page;
   const searchValue = searchParams.get('search') || value;
+  localStorage.setItem('searchTerm', searchValue);
 
   useEffect(() => {
     const controller = new AbortController();
