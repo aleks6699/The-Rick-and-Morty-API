@@ -1,10 +1,15 @@
+import { useState } from 'react';
 import { Link } from 'react-router';
-import { useSearchSync } from '../../hooks/useSearchSync';
 
 export function Header({
   onClick,
-}: Readonly<{ onClick: (value: string) => void }>) {
-  const { value, setValue } = useSearchSync();
+  initialValue,
+}: Readonly<{
+  onClick: (value: string) => void;
+  initialValue: string;
+}>) {
+  console.log('initialValue', initialValue);
+  const [inputValue, setInputValue] = useState(initialValue);
   return (
     <header className="container flex flex-col mx-auto md:flex-row gap-4 mb-8">
       <Link
@@ -28,11 +33,11 @@ export function Header({
         type="text"
         className="bg-gray-700 text-white border-0 rounded-lg p-4 text-lg w-full focus:ring-2 focus:ring-blue-400 focus:outline-none placeholder-gray-400 transition-all duration-300 shadow-lg"
         placeholder="Search character..."
-        value={value.trim()}
-        onChange={(e) => setValue(e.target.value)}
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
       />
       <button
-        onClick={() => onClick(value.trim())}
+        onClick={() => onClick(inputValue.trim())}
         className="cursor-pointer bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-lg text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95"
       >
         Search

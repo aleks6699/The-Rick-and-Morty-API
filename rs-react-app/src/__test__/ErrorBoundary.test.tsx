@@ -10,7 +10,7 @@ describe('ErrorBoundary', () => {
     render(
       <MemoryRouter initialEntries={['/?search=Test']}>
         <ErrorBoundary>
-          <Header onClick={() => {}} />
+          <Header onClick={() => {}} initialValue="Test" />
         </ErrorBoundary>
       </MemoryRouter>
     );
