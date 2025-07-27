@@ -8,7 +8,6 @@ export function Header({
   onClick: (value: string) => void;
   initialValue: string;
 }>) {
-  console.log('initialValue', initialValue);
   const [inputValue, setInputValue] = useState(initialValue);
   return (
     <header className="container flex flex-col mx-auto md:flex-row gap-4 mb-8">
