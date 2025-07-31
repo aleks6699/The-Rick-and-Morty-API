@@ -4,12 +4,13 @@ import { Pagination } from '../Pagination/Pagination';
 import { DownloadPopup } from '../DownloadPopup/DownloadPopup';
 import { useQuery } from '@tanstack/react-query';
 import { rickAndMortyApi } from '../../api/RickAndMortyApi';
+import { RefreshButton } from '../RefreshButton/RefreshButton';
 
 export function MainContent({ value }: Readonly<{ value: string }>) {
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
   const currentPage = Number(searchParams.get('page')) || 1;
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error, refetch, isFetching } = useQuery({
     queryKey: ['characters', currentPage, value],
     queryFn: ({ signal }) =>
       rickAndMortyApi.fetchCharacters(signal, value, currentPage),
@@ -28,11 +29,11 @@ export function MainContent({ value }: Readonly<{ value: string }>) {
 
   return (
     <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 relative pb-20">
-      {isLoading && (
-        <div className="flex justify-center mb-8 animate-pulse">
-          <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-        </div>
-      )}
+      <RefreshButton
+        queryKey={['characters', currentPage, value]}
+        isFetching={isFetching}
+        refetch={refetch}
+      />
 
       {error && (
         <p className="text-red-400 text-center text-xl mb-8 animate-fadeIn">
@@ -61,7 +62,7 @@ export function MainContent({ value }: Readonly<{ value: string }>) {
         </div>
 
         {isCharacterOpen && (
-          <div className="md:w-1/3 w-full max-h-[calc(100vh-10rem)] overflow-y-auto">
+          <div className="md:w-1/3 w-full max-h-[calc(100vh-10rem)]">
             <Outlet />
           </div>
         )}
