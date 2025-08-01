@@ -1,13 +1,12 @@
 import { useState } from 'react';
-import { Link, useSearchParams } from 'react-router';
+import { Link } from 'react-router';
 import { ToggleTheme } from '../ToggleTheme/ToggleTheme';
 
 export function Header({
   onClick,
-}: Readonly<{ onClick: (value: string) => void }>) {
-  const [searchParams] = useSearchParams();
-  const search = searchParams.get('search');
-  const [value, setValue] = useState<string>(search || '');
+  initialValue,
+}: Readonly<{ onClick: (value: string) => void; initialValue: string }>) {
+  const [inputValue, setInputValue] = useState(initialValue);
 
   return (
     <header className="container mx-auto px-4 sm:px-6 lg:px-8 mb-8">
@@ -33,7 +32,7 @@ export function Header({
         </Link>
 
         <input
-          type="text"
+          type="search"
           className="
             flex-1 min-w-[150px] md:min-w-[200px]
             bg-gray-700 light:bg-white 
@@ -45,12 +44,12 @@ export function Header({
             transition-all duration-300
           "
           placeholder="Search character..."
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
         />
 
         <button
-          onClick={() => onClick(value.trim())}
+          onClick={() => onClick(inputValue.trim())}
           className="
             text-white light:text-black
             bg-gradient-to-r from-blue-500 to-purple-600 
