@@ -2,19 +2,18 @@ import { Outlet, useSearchParams, useLocation } from 'react-router';
 import { CardItem } from '../CardItem/CardItem';
 import { Pagination } from '../Pagination/Pagination';
 import { DownloadPopup } from '../DownloadPopup/DownloadPopup';
-import { useQuery } from '@tanstack/react-query';
-import { rickAndMortyApi } from '../../api/RickAndMortyApi';
+import { useCharactersList } from '../../hooks/useQueryHooks';
 import { RefreshButton } from '../RefreshButton/RefreshButton';
 
 export function MainContent({ value }: Readonly<{ value: string }>) {
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
   const currentPage = Number(searchParams.get('page')) || 1;
-  const { data, isLoading, error, refetch, isFetching } = useQuery({
-    queryKey: ['characters', currentPage, value],
-    queryFn: ({ signal }) =>
-      rickAndMortyApi.fetchCharacters(signal, value, currentPage),
-  });
+
+  const { data, isLoading, isFetching, error, refetch } = useCharactersList(
+    currentPage,
+    value
+  );
 
   const handlePageChange = (newPage: number) => {
     setSearchParams({ search: value, page: newPage.toString() });
