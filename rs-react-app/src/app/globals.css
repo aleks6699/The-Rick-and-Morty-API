@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 @custom-variant light (&:where(.light, .light *));
 
 @keyframes fadeIn {

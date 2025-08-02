@@ -1,6 +1,6 @@
-import { Link } from 'react-router';
+import Link from 'next/link';
 
-export function AboutPage() {
+export default function AboutPage() {
   return (
     <div className="min-h-screen bg-gray-900 text-white p-8">
       <div className="max-w-4xl mx-auto bg-gray-800 rounded-xl p-8 shadow-2xl">
@@ -71,7 +71,7 @@ export function AboutPage() {
 
         <div className="mt-12 pt-6 border-t border-gray-700 flex justify-center">
           <Link
-            to="/"
+            href="/"
             className="px-8 py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-semibold transition-colors duration-300 flex items-center gap-2"
           >
             <svg
