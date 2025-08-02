@@ -1,5 +1,5 @@
 import type { FavoriteItem } from '../store/store';
-import { convertToCSV } from '../utils/convertCsv';
+import { convertToCSV } from '../utils/convertToCSVBlob';
 
 const rickAndMortyData: FavoriteItem[] = [
   {

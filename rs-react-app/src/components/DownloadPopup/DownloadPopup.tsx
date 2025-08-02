@@ -1,21 +1,21 @@
+'use client';
 import { createPortal } from 'react-dom';
 import { Download, X } from 'lucide-react';
-import { assertIsHTMLElement } from '../../utils/asserts/domAsserts';
 import useFavoritesStore from '../../store/store';
-import { convertToCSV } from '../../utils/convertCsv';
-const portalElement = document.getElementById('download-portal');
-assertIsHTMLElement(portalElement);
+import { useBlobUrl } from '@/hooks/useBlobUrl';
+import { convertToCSVBlob } from '@/utils/convertToCSVBlob';
+import { usePortalElement } from '@/hooks/usePortalElement';
 
 export const DownloadPopup = () => {
   const { favorites, resetFavorites } = useFavoritesStore();
 
-  if (favorites.length === 0) return null;
+  const csvBlob = favorites.length > 0 ? convertToCSVBlob(favorites) : null;
+  const csvUrl = useBlobUrl(csvBlob);
+  const portalRef = usePortalElement('download-portal');
 
+  if (!csvUrl || !portalRef) return null;
   return createPortal(
-    <div
-      className="fixed bottom-22 left-0 right-0 bg-gray-900/30 light:bg-white/30 border-t-4 border-blue-400
-        shadow-xl px-4 py-2 z-50 backdrop-blur-md"
-    >
+    <div className="fixed bottom-22 left-0 right-0 bg-gray-900/30 light:bg-white/30 border-t-4 border-blue-400 shadow-xl px-4 py-2 z-50 backdrop-blur-md">
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-0">
         <div className="flex items-center space-x-3">
           <div className="bg-blue-900 light:bg-blue-100 p-2 rounded-full">
@@ -44,7 +44,7 @@ export const DownloadPopup = () => {
           </button>
 
           <a
-            href={convertToCSV(favorites)}
+            href={csvUrl}
             download={`${favorites.length}_items.csv`}
             className="flex items-center space-x-1 sm:space-x-2 px-4 sm:px-6 py-1.5 sm:py-2 
               text-sm sm:text-base bg-blue-600 hover:bg-blue-500 light:bg-blue-500 light:hover:bg-blue-600 
@@ -56,6 +56,6 @@ export const DownloadPopup = () => {
         </div>
       </div>
     </div>,
-    portalElement
+    portalRef
   );
 };

@@ -10,11 +10,6 @@ import reactCompiler from 'eslint-plugin-react-compiler';
 export default tseslint.config(
   { ignores: ['dist', 'coverage'] },
   {
-    extends: [
-      js.configs.recommended,
-      ...tseslint.configs.strict,
-      eslintPluginPrettier,
-    ],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2020,
@@ -26,6 +21,11 @@ export default tseslint.config(
       'react-refresh': reactRefresh,
       'react-compiler': reactCompiler,
     },
+    extends: [
+      js.configs.recommended,
+      ...tseslint.configs.strict,
+      eslintPluginPrettier,
+    ],
     rules: {
       ...reactHooks.configs.recommended.rules,
       'react-refresh/only-export-components': 'off',

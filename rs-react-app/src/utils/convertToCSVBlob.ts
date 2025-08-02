@@ -1,6 +1,6 @@
 import type { FavoriteItem } from '../store/store';
 
-export function convertToCSV(items: FavoriteItem[]) {
+export function convertToCSVBlob(items: FavoriteItem[]): Blob {
   const headers = ['ID', 'Name', 'Status', 'Species', 'Gender', 'Image'];
   const rows = items.map((item) => [
     item.id,
@@ -11,8 +11,8 @@ export function convertToCSV(items: FavoriteItem[]) {
     item.image,
   ]);
 
-  const csvContent =
-    'data:text/csv;charset=utf-8,' +
-    [headers.join(';'), ...rows.map((e) => e.join(';'))].join('\n');
-  return encodeURI(csvContent);
+  const csvString = [headers.join(';'), ...rows.map((r) => r.join(';'))].join(
+    '\n'
+  );
+  return new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
 }

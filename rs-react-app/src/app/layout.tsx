@@ -14,6 +14,7 @@ function RootLayout({
   return (
     <html lang="en">
       <body>
+        <div id="download-portal"></div>
         <div id="root">{children}</div>
       </body>
     </html>
