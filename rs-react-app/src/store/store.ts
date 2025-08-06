@@ -17,8 +17,24 @@ interface StoreState {
 }
 
 const useFavoritesStore = create<StoreState>((set, get) => ({
-  favorites: [],
-
+  favorites: [
+    {
+      id: 1,
+      name: 'Rick Sanchez',
+      status: 'Alive',
+      species: 'Human',
+      gender: 'Male',
+      image: 'https://example.com/image.jpg',
+    },
+    {
+      id: 2,
+      name: 'Morty Smith',
+      status: 'Alive',
+      species: 'Human',
+      gender: 'Male',
+      image: 'https://example.com/image.jpg',
+    },
+  ],
   addFavorite: (item: FavoriteItem) => {
     const { favorites } = get();
     const alreadyExists = favorites.some((fav) => fav.id === item.id);

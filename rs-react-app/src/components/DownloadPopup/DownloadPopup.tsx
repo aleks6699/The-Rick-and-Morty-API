@@ -2,18 +2,23 @@
 import { createPortal } from 'react-dom';
 import { Download, X } from 'lucide-react';
 import useFavoritesStore from '../../store/store';
-import { useBlobUrl } from '@/hooks/useBlobUrl';
-import { convertToCSVBlob } from '@/utils/convertToCSVBlob';
 import { usePortalElement } from '@/hooks/usePortalElement';
+import { useDownloadableCSV } from '@/hooks/useDownloadableCSV';
+import { useRef } from 'react';
 
 export const DownloadPopup = () => {
   const { favorites, resetFavorites } = useFavoritesStore();
+  const portal = usePortalElement('download-portal');
+  const { url, fileName, isReady } = useDownloadableCSV(favorites);
+  const linkRef = useRef<HTMLAnchorElement>(null);
 
-  const csvBlob = favorites.length > 0 ? convertToCSVBlob(favorites) : null;
-  const csvUrl = useBlobUrl(csvBlob);
-  const portalRef = usePortalElement('download-portal');
+  const handleDownload = () => {
+    if (!url || !linkRef.current) return;
+    linkRef.current.click();
+  };
 
-  if (!csvUrl || !portalRef) return null;
+  if (!isReady || !portal || !url) return null;
+
   return createPortal(
     <div className="fixed bottom-22 left-0 right-0 bg-gray-900/30 light:bg-white/30 border-t-4 border-blue-400 shadow-xl px-4 py-2 z-50 backdrop-blur-md">
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-0">
@@ -43,19 +48,26 @@ export const DownloadPopup = () => {
             <span className="font-medium">Clear All</span>
           </button>
 
-          <a
-            href={csvUrl}
-            download={`${favorites.length}_items.csv`}
+          <button
+            onClick={handleDownload}
             className="flex items-center space-x-1 sm:space-x-2 px-4 sm:px-6 py-1.5 sm:py-2 
               text-sm sm:text-base bg-blue-600 hover:bg-blue-500 light:bg-blue-500 light:hover:bg-blue-600 
               text-white light:text-white rounded-lg transition-colors duration-200 font-medium shadow-md"
           >
             <Download className="w-4 h-4" />
             <span>Download</span>
-          </a>
+          </button>
+
+          <a
+            ref={linkRef}
+            href={url}
+            download={fileName}
+            style={{ display: 'none' }}
+            aria-label="Download CSV"
+          />
         </div>
       </div>
     </div>,
-    portalRef
+    portal
   );
 };

@@ -1,6 +1,8 @@
 import type { FavoriteItem } from '../store/store';
 
-export function convertToCSVBlob(items: FavoriteItem[]): Blob {
+export function convertToCSVBlob(items: FavoriteItem[]): Blob | null {
+  if (!items.length) return null;
+
   const headers = ['ID', 'Name', 'Status', 'Species', 'Gender', 'Image'];
   const rows = items.map((item) => [
     item.id,
