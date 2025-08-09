@@ -1,83 +1,49 @@
-import { render, screen } from '@testing-library/react';
+import { renderWithQueryClient } from './test-utils';
+import { screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { CharacterDetails } from '../components/CharacterDetails/CharacterDetails';
-import { useCharacterDetailsQuery } from '../hooks/useCharacterDetailsQuery';
-import { vi } from 'vitest';
 
-vi.mock('../hooks/useCharacterDetailsQuery', () => ({
-  useCharacterDetailsQuery: vi.fn(),
-}));
-
-describe('CharacterDetails', () => {
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
-  it('should render the loading spinner when loading is true', () => {
-    (useCharacterDetailsQuery as jest.Mock).mockReturnValue({
-      character: null,
-      loading: true,
-      error: null,
-      hasData: false,
-    });
-
-    render(
-      <MemoryRouter initialEntries={['/?search=&page=1&id=5']}>
+describe('CharacterDetails (integration with MSW)', () => {
+  it('should show loading spinner', () => {
+    renderWithQueryClient(
+      <MemoryRouter initialEntries={['/?id=1']}>
         <CharacterDetails />
       </MemoryRouter>
     );
 
-    const spinner = screen.getByTestId('loader');
-    expect(spinner).toBeInTheDocument();
+    expect(screen.getByTestId('loader')).toBeInTheDocument();
   });
 
-  it('should render the CharacterDetails component and show View API details link', async () => {
-    (useCharacterDetailsQuery as jest.Mock).mockReturnValue({
-      character: {
-        id: 5,
-        name: 'Rick Sanchez',
-        status: 'Alive',
-        species: 'Human',
-        gender: 'Male',
-        image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
-        type: '',
-        location: { name: 'Earth' },
-        origin: { name: 'Earth (C-137)' },
-        created: '2017-11-04T18:48:46.250Z',
-        url: 'https://rickandmortyapi.com/api/character/1',
-      },
-      loading: false,
-      error: null,
-      hasData: true,
-    });
-
-    render(
-      <MemoryRouter initialEntries={['/?search=&page=1&id=5']}>
+  it('should show character details', async () => {
+    renderWithQueryClient(
+      <MemoryRouter initialEntries={['/?id=1']}>
         <CharacterDetails />
       </MemoryRouter>
     );
 
-    const link = await screen.findByText(/view api details/i);
-    expect(link).toBeInTheDocument();
-
-    const closeButton = screen.getByTestId('close-button');
-    expect(closeButton).toBeInTheDocument();
+    const name = await screen.findByText('Rick Sanchez');
+    expect(name).toBeInTheDocument();
   });
-  it('should render the error message', () => {
-    (useCharacterDetailsQuery as jest.Mock).mockReturnValue({
-      character: null,
-      loading: false,
-      error: 'Character not found',
-      hasData: false,
-    });
 
-    render(
-      <MemoryRouter initialEntries={['/?search=&page=1&id=5']}>
+  it('should show 404 error', async () => {
+    renderWithQueryClient(
+      <MemoryRouter initialEntries={['/?id=404']}>
         <CharacterDetails />
       </MemoryRouter>
     );
 
-    const spinner = screen.getByText(/Character not found/i);
-    expect(spinner).toBeInTheDocument();
+    const errorMsg = await screen.findByText(/character not found/i);
+    expect(errorMsg).toBeInTheDocument();
+  });
+
+  it('should render empty character state', async () => {
+    renderWithQueryClient(
+      <MemoryRouter initialEntries={['/?id=500']}>
+        <CharacterDetails />
+      </MemoryRouter>
+    );
+
+    const msg = await screen.findByText(/character not found/i);
+    expect(msg).toBeInTheDocument();
   });
 });
