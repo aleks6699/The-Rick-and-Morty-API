@@ -7,7 +7,8 @@ import { useSearchParams } from 'next/navigation';
 
 export function Header() {
   const searchParams = useSearchParams();
-  const search = searchParams.get('search');
+  const search = searchParams.get('search') || '';
+  const page = searchParams.get('page') || '1';
   const router = useRouter();
   const [inputValue, setInputValue] = useState(search || '');
   const locale = useLocale();
@@ -55,12 +56,10 @@ export function Header() {
 
         <button
           onClick={() => {
-            if (inputValue) {
-              router.push({
-                pathname: '/',
-                query: { search: inputValue },
-              });
-            }
+            router.push({
+              pathname: '/',
+              query: { search: inputValue, page },
+            });
           }}
           className="
             text-white light:text-black

@@ -1,14 +1,13 @@
-import { Link, useLocation } from 'react-router';
-import type { Card } from '../../types/types';
-import { handleErorrImage } from '../../utils/handleErrorImage';
-import { FavoriteToggle } from '../FavoriteToggle/FavoriteToggle';
+'use client';
+import type { Card } from '../../../types/types';
+import { handleErorrImage } from '../../../utils/handleErrorImage';
+import { FavoriteToggle } from '../../../components/FavoriteToggle/FavoriteToggle';
+import { Link } from '@/i18n/navigation';
+import { useLocale } from 'next-intl';
 
 export function CardItem(props: Readonly<Card>) {
-  const locationUrl = useLocation();
-  const searchParams = new URLSearchParams(locationUrl.search);
+  const locale = useLocale();
   const { image, name, species, status, location, gender, id } = props;
-
-  searchParams.set('id', String(id));
 
   return (
     <li
@@ -18,7 +17,8 @@ export function CardItem(props: Readonly<Card>) {
     >
       <div className="relative h-[250px] overflow-hidden shrink-0">
         <Link
-          to={`/?${searchParams}`}
+          href={`/${id}`}
+          locale={locale}
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className="block w-full h-full"
         >

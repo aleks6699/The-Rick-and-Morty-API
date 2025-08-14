@@ -1,6 +1,10 @@
-import { getTranslations } from 'next-intl/server';
+import { MainContent } from '../components/mainContent/MainContent';
 
-export default async function HomePage() {
-  const t = await getTranslations('HomePage');
-  return <h1>{t('title')}</h1>;
+export default async function HomePage({
+  searchParams,
+}: Readonly<{
+  searchParams: Promise<{ search?: string; page?: string }>;
+}>) {
+  const params = await searchParams;
+  return <MainContent searchParams={params} />;
 }

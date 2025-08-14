@@ -25,14 +25,11 @@ export class RickAndMortyApi {
     return data;
   }
   async fetchCharacters(
-    signal: AbortSignal,
     term = ' ',
     page = 1,
     url = this.baseUrl
   ): Promise<ResponseCharacter> {
-    const response = await fetch(`${url}?name=${term}&page=${page}`, {
-      signal,
-    });
+    const response = await fetch(`${url}?name=${term.trim()}&page=${page}`);
     return await this.handleResponse<ResponseCharacter>(response);
   }
   async fetchCharacterById(
