@@ -2,6 +2,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import './globals.css';
 import { Metadata } from 'next';
 import { getLocale } from 'next-intl/server';
+import { ThemeProvider } from '@/provider/ThemeProvider';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -18,8 +19,10 @@ async function RootLayout({
     <html lang={locale}>
       <body>
         <NextIntlClientProvider>
-          <div id="download-portal" />
-          {children}
+          <ThemeProvider>
+            <div id="download-portal" />
+            {children}
+          </ThemeProvider>
         </NextIntlClientProvider>
       </body>
     </html>

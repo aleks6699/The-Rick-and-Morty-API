@@ -1,3 +1,5 @@
+'use client';
+import { useIsMounted } from '@/hooks/useIsMounted';
 import {
   createContext,
   useState,
@@ -10,23 +12,31 @@ type Theme = 'light' | 'dark';
 
 const ThemeValueContext = createContext<Theme>('light');
 const ThemeActionsContext = createContext<() => void>(() => {});
-
 const ThemeProvider = ({ children }: PropsWithChildren) => {
-  const getInitialTheme = (): Theme => {
-    const stored = localStorage.getItem('theme');
-    return stored === 'dark' || stored === 'light' ? stored : 'light';
-  };
+  const [theme, setTheme] = useState<Theme>('light');
+  const isMounted = useIsMounted();
 
-  const [theme, setTheme] = useState<Theme>(() => getInitialTheme());
   const toggleTheme = useCallback(() => {
     setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
   }, []);
 
   useEffect(() => {
+    if (!isMounted) return;
+    const stored = localStorage.getItem('theme');
+    if (stored === 'dark' || stored === 'light') {
+      setTheme(stored);
+    }
+  }, [isMounted]);
+
+  useEffect(() => {
+    if (!isMounted) return;
     const root = document.documentElement;
     root.classList.toggle('light', theme === 'light');
+    root.classList.toggle('dark', theme === 'dark');
     localStorage.setItem('theme', theme);
-  }, [theme]);
+  }, [theme, isMounted]);
+
+  if (!isMounted) return null;
 
   return (
     <ThemeValueContext.Provider value={theme}>

@@ -1,4 +1,4 @@
-import { useTheme, useThemeActions } from '../../hooks/useThemeHooks';
+import { useTheme, useThemeActions } from '@/hooks/useThemeHooks';
 import style from './toggleTheme.module.css';
 
 const PARTICLE_ANGLES = [30, 60, 90, 120, 150, 180] as const;

@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 
 export default function AboutPage() {
   return (
@@ -58,14 +58,14 @@ export default function AboutPage() {
               The <span className="font-bold">React course</span> at RS School
               helped me deepen my development knowledge:
             </p>
-            <a
+            <Link
               href="https://rs.school/courses/reactjs"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block mt-4 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl"
             >
               RS School React Course
-            </a>
+            </Link>
           </div>
         </div>
 
