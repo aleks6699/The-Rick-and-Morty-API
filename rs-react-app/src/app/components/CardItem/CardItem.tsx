@@ -1,12 +1,17 @@
 'use client';
 import type { Card } from '../../../types/types';
 import { handleErorrImage } from '../../../utils/handleErrorImage';
-import { FavoriteToggle } from '../../../components/FavoriteToggle/FavoriteToggle';
 import { Link } from '@/i18n/navigation';
 import { useLocale } from 'next-intl';
+import { useSearchParams } from 'next/navigation';
+import { FavoriteToggle } from '../favoriteToggle/FavoriteToggle';
 
 export function CardItem(props: Readonly<Card>) {
   const locale = useLocale();
+  const searchParams = useSearchParams();
+  const page = searchParams.get('page');
+  const search = searchParams.get('search');
+
   const { image, name, species, status, location, gender, id } = props;
 
   return (
@@ -17,7 +22,14 @@ export function CardItem(props: Readonly<Card>) {
     >
       <div className="relative h-[250px] overflow-hidden shrink-0">
         <Link
-          href={`/${id}`}
+          href={{
+            pathname: `/`,
+            query: {
+              search,
+              page,
+              id,
+            },
+          }}
           locale={locale}
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className="block w-full h-full"

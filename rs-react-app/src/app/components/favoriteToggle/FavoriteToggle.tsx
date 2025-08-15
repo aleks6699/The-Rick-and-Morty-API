@@ -1,5 +1,5 @@
-import useFavoritesStore from '../../store/store';
-import type { Card } from '../../types/types';
+import useFavoritesStore from '@/store/store';
+import { Card } from '@/types/types';
 
 export function FavoriteToggle(props: Readonly<Card>) {
   const isChecked = useFavoritesStore((state) => state.isFavorite(props.id));

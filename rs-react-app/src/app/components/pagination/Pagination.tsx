@@ -1,21 +1,16 @@
-'use client';
-
-import { use } from 'react';
-import { ResponseCharacter } from '@/types/types';
 import { Link } from '@/i18n/navigation';
 import { cn } from '@/utils/class-names';
 
 export function Pagination({
   currentPage,
   search,
-  сharactersPromise,
+  pagesAll,
 }: Readonly<{
   currentPage: number;
   search: string;
-  сharactersPromise: Promise<ResponseCharacter>;
+  pagesAll?: number;
 }>) {
-  const characters = use(сharactersPromise);
-  const totalPages = characters.info.pages;
+  const totalPages = pagesAll ?? 1;
 
   if (totalPages < 2) return null;
 

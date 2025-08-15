@@ -3,44 +3,51 @@ import type { Card, ResponseCharacter } from '../types/types';
 
 export class RickAndMortyApi {
   private readonly baseUrl: string;
+
   constructor(baseUrl: string = API_BASE_URL) {
     this.baseUrl = baseUrl;
   }
-  async handleResponse<T>(
-    response: Response,
-    errorMessage: string = 'Character not found'
-  ): Promise<T> {
-    if (!response.ok) {
-      throw new Error(errorMessage);
-    }
-    const data = await response.json();
-    if (data.error) {
-      throw new Error(errorMessage);
-    }
 
-    if (!Array.isArray(data.results)) {
+  async handleResponse<T>(response: Response, emptyValue: T): Promise<T> {
+    try {
+      if (!response.ok) {
+        return emptyValue;
+      }
+
+      const data: T & { error?: string } = await response.json();
+
+      if (data.error) {
+        return emptyValue;
+      }
+
       return data;
+    } catch (err) {
+      console.error(err);
+      return emptyValue;
     }
-
-    return data;
   }
+
   async fetchCharacters(
     term = ' ',
     page = 1,
     url = this.baseUrl
   ): Promise<ResponseCharacter> {
+    const empty: ResponseCharacter = {
+      info: { count: 0, pages: 0, next: null, prev: null },
+      results: [],
+    };
     const response = await fetch(`${url}?name=${term.trim()}&page=${page}`);
-    return await this.handleResponse<ResponseCharacter>(response);
+    return this.handleResponse<ResponseCharacter>(response, empty);
   }
+
   async fetchCharacterById(
     id: number,
-    signal: AbortSignal,
+    signal?: AbortSignal,
     url = this.baseUrl
-  ): Promise<Card> {
-    const response = await fetch(`${url}/${id}`, {
-      signal,
-    });
-    return await this.handleResponse<Card>(response);
+  ): Promise<Card | null> {
+    const response = await fetch(`${url}/${id}`, { signal });
+
+    return this.handleResponse<Card | null>(response, null);
   }
 }
 

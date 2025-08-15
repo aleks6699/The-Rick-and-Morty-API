@@ -1,10 +1,11 @@
 'use client';
 import { createPortal } from 'react-dom';
 import { Download, X } from 'lucide-react';
-import useFavoritesStore from '../../store/store';
+
 import { usePortalElement } from '@/hooks/usePortalElement';
 import { useDownloadableCSV } from '@/hooks/useDownloadableCSV';
 import { useRef } from 'react';
+import useFavoritesStore from '@/store/store';
 
 export const DownloadPopup = () => {
   const { favorites, resetFavorites } = useFavoritesStore();

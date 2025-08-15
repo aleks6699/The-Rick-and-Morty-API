@@ -2,7 +2,7 @@ import { hasLocale } from 'next-intl';
 import { Header } from '../components/header/Header';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
-import { DownloadPopup } from '@/components/DownloadPopup/DownloadPopup';
+import { DownloadPopup } from '../components/downloadPopup/DownloadPopup';
 
 export default async function LocaleLayout({
   params,

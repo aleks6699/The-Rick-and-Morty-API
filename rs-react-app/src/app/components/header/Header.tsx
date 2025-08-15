@@ -8,7 +8,6 @@ import { useSearchParams } from 'next/navigation';
 export function Header() {
   const searchParams = useSearchParams();
   const search = searchParams.get('search') || '';
-  const page = searchParams.get('page') || '1';
   const router = useRouter();
   const [inputValue, setInputValue] = useState(search || '');
   const locale = useLocale();
@@ -58,7 +57,7 @@ export function Header() {
           onClick={() => {
             router.push({
               pathname: '/',
-              query: { search: inputValue, page },
+              query: { search: inputValue, page: '1' },
             });
           }}
           className="
