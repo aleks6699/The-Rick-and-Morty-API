@@ -1,78 +1,81 @@
 import { Link } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
 
 export default function AboutPage() {
+  const t = useTranslations('about');
+
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-8">
-      <div className="max-w-4xl mx-auto bg-gray-800 rounded-xl p-8 shadow-2xl">
+    <div className="min-h-screen bg-gray-900 text-white light:bg-white light:text-black p-8 transition-colors duration-300">
+      <div className="max-w-4xl mx-auto bg-gray-800 rounded-xl p-8 shadow-2xl light:bg-gray-100 light:shadow-lg transition-colors duration-300">
         <div className="flex flex-col items-center mb-8">
-          <h1 className="text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
-            About the App
+          <h1 className="text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 light:from-blue-600 light:to-purple-600 transition-colors duration-300">
+            {t('title')}
           </h1>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full mb-8"></div>
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full mb-8 light:from-blue-400 light:to-purple-400 transition-colors duration-300"></div>
         </div>
 
         <div className="space-y-6 text-lg">
           <div className="flex items-start">
             <div className="flex-shrink-0 mr-4">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center light:from-blue-400 light:to-purple-400 transition-colors duration-300">
                 <span className="text-2xl font-bold">A</span>
               </div>
             </div>
             <div>
-              <h2 className="text-2xl font-semibold mb-2">Author</h2>
+              <h2 className="text-2xl font-semibold mb-2">
+                {t('author.title')}
+              </h2>
               <p>
-                Hello! I&apos;m{' '}
-                <span className="font-bold text-blue-400">
-                  Oleksandr Tsurkan
+                <span className="font-bold text-blue-400 light:text-blue-600">
+                  {t('author.description')}
                 </span>
-                , a frontend developer specializing in:
               </p>
               <div className="flex flex-wrap gap-2 mt-2">
-                <span className="px-3 py-1 bg-gray-700 rounded-full text-sm">
+                <span className="px-3 py-1 bg-gray-700 rounded-full text-sm light:bg-gray-200 light:text-black transition-colors duration-300">
                   Next.js
                 </span>
-                <span className="px-3 py-1 bg-gray-700 rounded-full text-sm">
+                <span className="px-3 py-1 bg-gray-700 rounded-full text-sm light:bg-gray-200 light:text-black transition-colors duration-300">
                   React
                 </span>
-                <span className="px-3 py-1 bg-gray-700 rounded-full text-sm">
+                <span className="px-3 py-1 bg-gray-700 rounded-full text-sm light:bg-gray-200 light:text-black transition-colors duration-300">
                   TypeScript
                 </span>
-                <span className="px-3 py-1 bg-gray-700 rounded-full text-sm">
+                <span className="px-3 py-1 bg-gray-700 rounded-full text-sm light:bg-gray-200 light:text-black transition-colors duration-300">
                   Tailwind CSS
                 </span>
               </div>
             </div>
           </div>
 
-          <div className="pt-6 border-t border-gray-700">
-            <h2 className="text-2xl font-semibold mb-4">About the Project</h2>
-            <p>
-              This application uses the Rick and Morty API to demonstrate modern
-              frontend development skills.
-            </p>
+          <div className="pt-6 border-t border-gray-700 light:border-gray-300 transition-colors duration-300">
+            <h2 className="text-2xl font-semibold mb-4">
+              {t('project.title')}
+            </h2>
+            <p>{t('project.description')}</p>
           </div>
 
-          <div className="pt-6 border-t border-gray-700">
-            <h2 className="text-2xl font-semibold mb-4">Education</h2>
+          <div className="pt-6 border-t border-gray-700 light:border-gray-300 transition-colors duration-300">
+            <h2 className="text-2xl font-semibold mb-4">
+              {t('education.title')}
+            </h2>
             <p>
-              The <span className="font-bold">React course</span> at RS School
-              helped me deepen my development knowledge:
+              <span className="font-bold">{t('education.description')}</span>,
             </p>
             <Link
               href="https://rs.school/courses/reactjs"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block mt-4 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="inline-block mt-4 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl light:from-blue-400 light:to-purple-400 light:hover:from-blue-500 light:hover:to-purple-500"
             >
-              RS School React Course
+              {t('education.courseLink')}
             </Link>
           </div>
         </div>
 
-        <div className="mt-12 pt-6 border-t border-gray-700 flex justify-center">
+        <div className="mt-12 pt-6 border-t border-gray-700 light:border-gray-300 flex justify-center transition-colors duration-300">
           <Link
             href="/"
-            className="px-8 py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-semibold transition-colors duration-300 flex items-center gap-2"
+            className="px-8 py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-semibold transition-colors duration-300 flex items-center gap-2 light:bg-gray-200 light:hover:bg-gray-300 light:text-black"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +89,7 @@ export default function AboutPage() {
                 clipRule="evenodd"
               />
             </svg>
-            Back to Characters
+            {t('backButton')}
           </Link>
         </div>
       </div>

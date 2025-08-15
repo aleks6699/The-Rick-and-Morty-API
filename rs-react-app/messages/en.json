@@ -1,6 +1,19 @@
 {
-  "HomePage": {
-    "title": "Hello world!",
-    "about": "Go to the about page"
+  "about": {
+    "title": "About the App",
+    "author": {
+      "title": "Author",
+      "description": "Hello! I'm Oleksandr Tsurkan, a frontend developer specializing in:"
+    },
+    "project": {
+      "title": "About the Project",
+      "description": "This application uses the Rick and Morty API to demonstrate modern frontend development skills."
+    },
+    "education": {
+      "title": "Education",
+      "description": "The React course at RS School helped me deepen my development knowledge:",
+      "courseLink": "RS School React Course"
+    },
+    "backButton": "Back to Characters"
   }
 }
