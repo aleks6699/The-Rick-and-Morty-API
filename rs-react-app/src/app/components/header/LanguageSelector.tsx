@@ -1,45 +1,26 @@
 'use client';
 import { useRouter, usePathname } from '@/i18n/navigation';
+import { useLocale } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
-import { useState, useEffect } from 'react';
 
 export function LanguageSelector() {
   const router = useRouter();
   const pathname = usePathname();
+  const locale = useLocale();
   const searchParams = useSearchParams();
 
   const locales = ['en', 'ru'];
-  const cleanPathname = pathname.replace(/^\/(en|ru)/, '') || '/';
-
-  const [currentLocale, setCurrentLocale] = useState<string>('en');
-
-  useEffect(() => {
-    const savedLocale = localStorage.getItem('locale');
-
-    setCurrentLocale(savedLocale || 'en');
-  }, [setCurrentLocale]);
 
   const handleLocaleChange = (newLocale: string) => {
-    setCurrentLocale(newLocale);
-    localStorage.setItem('locale', newLocale);
+    const params = searchParams.toString();
+    const url = params ? `${pathname}?${params}` : pathname;
 
-    const currentQuery: Record<string, string> = {};
-    searchParams.forEach((value, key) => {
-      currentQuery[key] = value;
-    });
-
-    router.push(
-      {
-        pathname: cleanPathname,
-        query: Object.keys(currentQuery).length > 0 ? currentQuery : undefined,
-      },
-      { locale: newLocale }
-    );
+    router.push(url, { locale: newLocale });
   };
 
   return (
     <select
-      value={currentLocale}
+      value={locale}
       onChange={(e) => handleLocaleChange(e.target.value)}
       className="
         bg-gray-700 light:bg-white

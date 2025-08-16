@@ -18,5 +18,21 @@
   },
   "pagination": {
     "page": "page"
+  },
+  "aboutLink": {
+    "title": "About"
+  },
+  "searchInput": {
+    "search": "Search",
+    "placeholder": "Search character..."
+  },
+  "downloadPopup": {
+    "download": "Download",
+    "clear": "Clear All",
+    "selected": "Selected",
+    "items": "items",
+    "item": "item",
+    "ready": "Ready to download"
   }
+  
 }

@@ -1,8 +1,10 @@
 import { Link } from '@/i18n/navigation';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 export function AboutLink() {
   const currentLocale = useLocale();
+  const t = useTranslations('aboutLink');
+
   return (
     <Link
       href="/about"
@@ -22,7 +24,7 @@ export function AboutLink() {
         min-w-[100px] text-center
       "
     >
-      About
+      {t('title')}
     </Link>
   );
 }

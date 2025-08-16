@@ -1,14 +1,15 @@
 'use client';
 import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import Link from 'next/link';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
 
 export function SearchInput() {
   const currentLocale = useLocale();
   const searchParams = useSearchParams();
   const search = searchParams.get('search');
   const [inputValue, setInputValue] = useState(search || '');
+  const t = useTranslations('searchInput');
 
   return (
     <>
@@ -24,7 +25,7 @@ export function SearchInput() {
               focus:ring-2 focus:ring-blue-400 focus:outline-none
             transition-all duration-300
           "
-        placeholder="Search character..."
+        placeholder={t('placeholder')}
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
       />
@@ -47,7 +48,7 @@ export function SearchInput() {
             min-w-[100px]
           "
       >
-        Search
+        {t('search')}
       </Link>
     </>
   );

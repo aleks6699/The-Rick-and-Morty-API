@@ -17,6 +17,21 @@
     "backButton": "Назад к персонажам"
   },
   "pagination": {
-    "page": "page"
+    "page": "страница"
+  },
+  "aboutLink": {
+    "title": "О приложении"
+  },
+  "searchInput": {
+    "search": "Поиск",
+    "placeholder": "Поиск персонажа..."
+  },
+  "downloadPopup": {
+    "download": "Скачать",
+    "clear": "Очистить",
+    "selected": "Выбрано",
+    "items": "элементов",
+    "item": "элемент",
+    "ready": "Готово  для скачивания"
   }
 }

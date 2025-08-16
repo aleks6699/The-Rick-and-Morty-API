@@ -6,12 +6,14 @@ import { usePortalElement } from '@/hooks/usePortalElement';
 import { useDownloadableCSV } from '@/hooks/useDownloadableCSV';
 import { useRef } from 'react';
 import useFavoritesStore from '@/store/store';
+import { useTranslations } from 'next-intl';
 
 export const DownloadPopup = () => {
   const { favorites, resetFavorites } = useFavoritesStore();
   const portal = usePortalElement('download-portal');
   const { url, fileName, isReady } = useDownloadableCSV(favorites);
   const linkRef = useRef<HTMLAnchorElement>(null);
+  const t = useTranslations('downloadPopup');
 
   const handleDownload = () => {
     if (!url || !linkRef.current) return;
@@ -29,11 +31,11 @@ export const DownloadPopup = () => {
           </div>
           <div>
             <h3 className="font-bold text-gray-100 light:text-gray-800 text-[clamp(0.9rem,2vw,1.125rem)]">
-              Selected {favorites.length}{' '}
-              {favorites.length === 1 ? 'item' : 'items'}
+              {t('selected')} {favorites.length}{' '}
+              {favorites.length === 1 ? t('item') : t('items')}
             </h3>
             <p className="text-[clamp(0.75rem,1.8vw,0.95rem)] text-gray-300 light:text-gray-600">
-              Ready to download
+              {t('ready')}
             </p>
           </div>
         </div>
@@ -46,7 +48,7 @@ export const DownloadPopup = () => {
               text-gray-200 light:text-gray-700 rounded-lg transition-colors duration-200"
           >
             <X className="w-4 h-4" />
-            <span className="font-medium">Clear All</span>
+            <span className="font-medium">{t('clear')}</span>
           </button>
 
           <button
@@ -56,7 +58,7 @@ export const DownloadPopup = () => {
               text-white light:text-white rounded-lg transition-colors duration-200 font-medium shadow-md"
           >
             <Download className="w-4 h-4" />
-            <span>Download</span>
+            <span>{t('download')}</span>
           </button>
 
           <a
