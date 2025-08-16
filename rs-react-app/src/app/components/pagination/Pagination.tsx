@@ -1,5 +1,6 @@
 import { Link } from '@/i18n/navigation';
 import { cn } from '@/utils/class-names';
+import { useTranslations } from 'next-intl';
 
 export function Pagination({
   currentPage,
@@ -10,6 +11,7 @@ export function Pagination({
   search: string;
   pagesAll?: number;
 }>) {
+  const t = useTranslations('pagination');
   const totalPages = pagesAll ?? 1;
 
   if (totalPages < 2) return null;
@@ -44,7 +46,7 @@ export function Pagination({
     <div className="fixed bottom-0 left-0 right-0 bg-gray-700 shadow-lg border-t border-gray-200 py-3 z-10 light:bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
         <div className="text-sm text-gray-400 light:text-gray-600">
-          Page {currentPage} of {totalPages}
+          {t('page')} {currentPage} of {totalPages}
         </div>
 
         <div className="flex gap-1">

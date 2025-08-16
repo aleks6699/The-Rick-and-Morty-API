@@ -15,5 +15,8 @@
       "courseLink": "RS School React Course"
     },
     "backButton": "Back to Characters"
+  },
+  "pagination": {
+    "page": "page"
   }
 }

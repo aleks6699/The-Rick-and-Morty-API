@@ -15,5 +15,8 @@
       "courseLink": "Курс React от RS School"
     },
     "backButton": "Назад к персонажам"
+  },
+  "pagination": {
+    "page": "page"
   }
 }

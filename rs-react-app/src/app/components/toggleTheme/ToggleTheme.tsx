@@ -1,3 +1,4 @@
+'use client';
 import { useTheme, useThemeActions } from '@/hooks/useThemeHooks';
 import style from './toggleTheme.module.css';
 

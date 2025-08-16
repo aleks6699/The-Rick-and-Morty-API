@@ -17,10 +17,10 @@ export function LanguageSelector() {
     const savedLocale = localStorage.getItem('locale');
 
     setCurrentLocale(savedLocale || 'en');
-  }, []);
+  }, [setCurrentLocale]);
 
   const handleLocaleChange = (newLocale: string) => {
-    setCurrentLocale(newLocale as 'en' | 'ru');
+    setCurrentLocale(newLocale);
     localStorage.setItem('locale', newLocale);
 
     const currentQuery: Record<string, string> = {};

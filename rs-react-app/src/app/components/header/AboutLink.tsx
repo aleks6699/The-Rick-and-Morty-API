@@ -1,10 +1,8 @@
 import { Link } from '@/i18n/navigation';
+import { useLocale } from 'next-intl';
 
-interface AboutLinkProps {
-  currentLocale: 'en' | 'ru';
-}
-
-export function AboutLink({ currentLocale }: Readonly<AboutLinkProps>) {
+export function AboutLink() {
+  const currentLocale = useLocale();
   return (
     <Link
       href="/about"
