@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { ResponseCharacter, Card } from '@/types/types';
-import { CardItem } from '../CardItem/CardItem';
+import { CardItem } from '../cardItem/CardItem';
 import { Loading } from '../loading/Loading';
 
 export function CardsCharacters({
