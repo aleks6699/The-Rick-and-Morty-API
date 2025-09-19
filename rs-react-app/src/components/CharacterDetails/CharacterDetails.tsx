@@ -1,7 +1,6 @@
 import { useSearchParams, useNavigate } from 'react-router';
 import { handleErorrImage } from '../../utils/handleErrorImage';
-import { useQuery } from '@tanstack/react-query';
-import { rickAndMortyApi } from '../../api/RickAndMortyApi';
+import { useCharacterById } from '../../hooks/useQueryHooks';
 import { RefreshButton } from '../RefreshButton/RefreshButton';
 
 export function CharacterDetails() {
@@ -14,11 +13,7 @@ export function CharacterDetails() {
     error,
     refetch,
     isFetching,
-  } = useQuery({
-    queryKey: ['character', id],
-    queryFn: ({ signal }) =>
-      rickAndMortyApi.fetchCharacterById(Number(id), signal),
-  });
+  } = useCharacterById(Number(id));
 
   function getStatusCharacter(status: string) {
     switch (status) {

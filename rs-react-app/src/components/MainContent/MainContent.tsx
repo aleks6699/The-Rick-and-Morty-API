@@ -2,19 +2,18 @@ import { Outlet, useSearchParams, useLocation } from 'react-router';
 import { CardItem } from '../CardItem/CardItem';
 import { Pagination } from '../Pagination/Pagination';
 import { DownloadPopup } from '../DownloadPopup/DownloadPopup';
-import { useQuery } from '@tanstack/react-query';
-import { rickAndMortyApi } from '../../api/RickAndMortyApi';
+import { useCharactersList } from '../../hooks/useQueryHooks';
 import { RefreshButton } from '../RefreshButton/RefreshButton';
 
 export function MainContent({ value }: Readonly<{ value: string }>) {
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
   const currentPage = Number(searchParams.get('page')) || 1;
-  const { data, isLoading, error, refetch, isFetching } = useQuery({
-    queryKey: ['characters', currentPage, value],
-    queryFn: ({ signal }) =>
-      rickAndMortyApi.fetchCharacters(signal, value, currentPage),
-  });
+
+  const { data, isLoading, isFetching, error, refetch } = useCharactersList(
+    currentPage,
+    value
+  );
 
   const handlePageChange = (newPage: number) => {
     setSearchParams({ search: value, page: newPage.toString() });
@@ -34,6 +33,11 @@ export function MainContent({ value }: Readonly<{ value: string }>) {
         isFetching={isFetching}
         refetch={refetch}
       />
+      {isLoading && (
+        <div className="flex justify-center mb-8 animate-pulse">
+          <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      )}
 
       {error && (
         <p className="text-red-400 text-center text-xl mb-8 animate-fadeIn">
